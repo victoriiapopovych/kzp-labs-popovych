@@ -43,7 +43,7 @@ jobs:
 
       # Зберігаємо створений JAR як артефакт конкретного CI-запуску.
       - name: Upload JAR
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: jar-${{ matrix.os }}-${{ github.run_number }}
           path: target/*.jar
