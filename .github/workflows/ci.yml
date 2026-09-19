@@ -1,4 +1,5 @@
 # Один workflow перевіряє однаковий commit на трьох операційних системах.
+
 name: CI
 
 on:
@@ -14,6 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+
     runs-on: ${{ matrix.os }}
 
     steps:
