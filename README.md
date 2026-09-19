@@ -85,3 +85,26 @@ java -jar target/lab01-1.0.0.jar
 ```powershell
 java -jar target/lab01-1.0.0.jar --help
 ```
+
+Виведення версії:
+
+```powershell
+java -jar target/lab01-1.0.0.jar --version
+```
+
+Поточна версія програми: `1.0.0`.
+
+## CI
+
+Для проєкту налаштовано GitHub Actions.
+
+Під час `push` і `pull_request` проєкт автоматично перевіряється на:
+- Ubuntu;
+- Windows;
+- macOS.
+
+На кожній операційній системі використовується Java 21 та Maven Wrapper.
+
+Команда `verify` запускає JUnit 5 тести та статичний аналіз SpotBugs.
+
+Після успішної перевірки виконуваний JAR публікується як GitHub Actions artifact для кожної операційної системи.
