@@ -46,3 +46,42 @@ java -cp target/classes ua.lpnu.kzp.Main --help
 Явне задання вхідного і вихідного файла:
 
 java -cp target/classes ua.lpnu.kzp.Main --input data/input.csv --output out/custom-report.txt
+
+
+## Maven
+
+Проєкт використовує Maven Wrapper, тому для збірки не потрібна окрема локальна версія Maven.
+
+На macOS та Ubuntu замість `.\mvnw.cmd` використовується `./mvnw`.
+
+Запуск тестів:
+
+```powershell
+.\mvnw.cmd test
+```
+
+Перевірка тестів і статичного аналізу SpotBugs:
+
+```powershell
+.\mvnw.cmd verify
+```
+
+Створення виконуваного JAR:
+
+```powershell
+.\mvnw.cmd package
+```
+
+Після успішної збірки виконуваний JAR створюється у каталозі `target`.
+
+Запуск JAR:
+
+```powershell
+java -jar target/lab01-1.0.0.jar
+```
+
+Виведення довідки:
+
+```powershell
+java -jar target/lab01-1.0.0.jar --help
+```
