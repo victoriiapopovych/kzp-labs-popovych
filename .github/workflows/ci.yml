@@ -40,3 +40,11 @@ jobs:
       - name: Verify on Windows
         if: runner.os == 'Windows'
         run: .\mvnw.cmd -B verify
+
+      # Зберігаємо створений JAR як артефакт конкретного CI-запуску.
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: jar-${{ matrix.os }}-${{ github.run_number }}
+          path: target/*.jar
+          if-no-files-found: error
