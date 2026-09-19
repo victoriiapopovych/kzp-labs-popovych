@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 class MainTest {
 
     @TempDir
@@ -111,6 +114,28 @@ class MainTest {
         assertTrue(report.contains("Коректних записів"));
         assertTrue(report.contains("Середня вологість"));
         assertEquals(report, new String(Files.readAllBytes(output), StandardCharsets.UTF_8));
+    }
+
+    @Test
+    void versionArgumentPrintsVersion() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new PrintStream(
+                    output,
+                    true,
+                    StandardCharsets.UTF_8));
+
+            Main.main(new String[]{"--version"});
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        assertEquals(
+                "1.0.0" + System.lineSeparator(),
+                output.toString(StandardCharsets.UTF_8));
     }
 
     private String runProgram(String... lines) throws IOException {
