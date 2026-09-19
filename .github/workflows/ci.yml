@@ -1,0 +1,40 @@
+# Один workflow перевіряє однаковий commit на трьох операційних системах.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # Отримуємо код commit або Pull Request.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Встановлюємо однаковий JDK 21 і кешуємо залежності Maven.
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      # На macOS та Ubuntu Wrapper запускають як Unix-скрипт.
+      - name: Verify on Unix
+        if: runner.os != 'Windows'
+        run: ./mvnw -B verify
+
+      # На Windows використовується окремий cmd-скрипт Wrapper.
+      - name: Verify on Windows
+        if: runner.os == 'Windows'
+        run: .\mvnw.cmd -B verify
