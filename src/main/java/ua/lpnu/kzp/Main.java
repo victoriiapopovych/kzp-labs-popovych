@@ -21,6 +21,12 @@ public final class Main {
     private Main() {
     }
 
+    /**
+     * Точка входу програми.
+     * Обробляє аргументи командного рядка та запускає обробку файла.
+     *
+     * @param args аргументи командного рядка
+     */
     public static void main(String[] args) {
         Path input = DEFAULT_INPUT;
         Path output = DEFAULT_OUTPUT;
@@ -70,6 +76,13 @@ public final class Main {
         processFile(input, output);
     }
 
+    /**
+     * Читає вхідний файл, перевіряє записи,
+     * обчислює статистику та формує звіт.
+     *
+     * @param input шлях до вхідного файла
+     * @param output шлях до файла звіту
+     */
     private static void processFile(Path input, Path output) {
         final List<String> lines;
 
@@ -211,6 +224,12 @@ public final class Main {
         writeReport(output, report);
     }
 
+    /**
+     * Записує сформований звіт у UTF-8 файл.
+     *
+     * @param output шлях до файла звіту
+     * @param report текст звіту
+     */
     private static void writeReport(Path output, String report) {
         try {
             Path parent = output.getParent();
@@ -237,6 +256,12 @@ public final class Main {
         }
     }
 
+    /**
+     * Виводить повідомлення про пропущений некоректний рядок.
+     *
+     * @param lineNumber номер рядка
+     * @param reason причина пропуску
+     */
     private static void printSkippedLine(
             int lineNumber,
             String reason) {
@@ -247,6 +272,9 @@ public final class Main {
                 reason);
     }
 
+    /**
+     * Виводить довідку про доступні параметри командного рядка.
+     */
     private static void printHelp() {
         System.out.printf(
                 "Лабораторна робота № 1, варіант 18 — Метеостанція%n"
